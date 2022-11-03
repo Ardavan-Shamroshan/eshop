@@ -16,7 +16,7 @@ def index(request):
 
 
 # Product detail
-def show(request, product_id):
+def show(request, product_slug):
     # try:
     #     product = Product.objects.get(pk=product_id)
     #     context = {
@@ -24,7 +24,7 @@ def show(request, product_id):
     #     }
     # except Exception:
     #     raise Http404()
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, slug=product_slug)
     context = {
         'product': product
     }

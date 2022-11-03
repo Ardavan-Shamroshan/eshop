@@ -1,6 +1,7 @@
-from django.db import models
 from django.core.validators import *
+from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -14,6 +15,7 @@ class Product(models.Model):
     ], default=0)
     summary = models.CharField(max_length=350, null=True)
     is_active = models.BooleanField(default=False)
+    slug = models.SlugField(default='', null=False)
 
     # to display an object in the Django admin site and as the value inserted into a template
     # when it displays an object.
@@ -27,4 +29,12 @@ class Product(models.Model):
     def get_absolute_url(self):
         # While this code is correct and simple, it may not be the most portable way to write this kind of method.
         # The reverse() function is usually the best approach.
-        return reverse('product.show', args=[self.id])
+        return reverse('product.show', args=[self.slug])
+
+    # Overriding save() method
+    # To save an object back to the database, call save():
+    def save(self, *args, **kwargs):
+        # Converts a string to a URL slug
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
