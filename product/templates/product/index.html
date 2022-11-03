@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+{% block title %}
+    product list
+{% endblock %}
+{% block content %}
+    <ul>
+        {% for product in products %}
+{#            <li><a href="{% url 'product.show' product_id=product.id %}">{{ product.title }} / {{ product.price }}$</a></li>#}
+            <li><a href="{{ product.get_absolute_url }}">{{ product.title }} / {{ product.price }}$</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

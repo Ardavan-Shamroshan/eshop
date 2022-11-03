@@ -1,0 +1,8 @@
+{% extends 'layouts/base.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+{% block content %}
+    <h1><a href="{% url 'product' %}">«back</a></h1>
+    <h1>{{ product.title }}</h1>
+    <h2>Price: {{ product.price }}</h2>
+    <p>{{ product.summary }}</p>
+{% endblock %}
