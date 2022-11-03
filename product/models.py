@@ -15,7 +15,7 @@ class Product(models.Model):
     ], default=0)
     summary = models.CharField(max_length=350, null=True)
     is_active = models.BooleanField(default=False)
-    slug = models.SlugField(default='', null=False)
+    slug = models.SlugField(default='', null=False, db_index=True)
 
     # to display an object in the Django admin site and as the value inserted into a template
     # when it displays an object.
@@ -37,4 +37,3 @@ class Product(models.Model):
         # Converts a string to a URL slug
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-
