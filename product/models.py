@@ -15,6 +15,11 @@ class ProductCategory(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    # To override the database table name, use the db_table parameter in class Meta.
+    class Meta:
+        verbose_name = 'دسته بندی'
+        verbose_name_plural = 'دسته بندی ها'
+
 
 # product information (one to one)
 class ProductInformation(models.Model):
@@ -23,6 +28,11 @@ class ProductInformation(models.Model):
 
     def __str__(self):
         return f'{self.color} {self.size}'
+
+    # To override the database table name, use the db_table parameter in class Meta.
+    class Meta:
+        verbose_name = 'اطلاعات تکمیلی'
+        verbose_name_plural = 'تمامی اطلاعات تکمیلی'
 
 
 # products
@@ -59,3 +69,8 @@ class Product(models.Model):
         # Converts a string to a URL slug
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    # To override the database table name, use the db_table parameter in class Meta.
+    class Meta:
+        verbose_name = 'محصول'
+        verbose_name_plural = 'محصولات'
