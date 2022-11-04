@@ -9,6 +9,12 @@
             <li><a href="{{ product.get_absolute_url }}">{{ product.title }} / {{ product.price }}$</a></li>
         {% endfor %}
     </ul>
+    {% for category in categories %}
+        <h3> دسته {{ category.title }}</h3>
+        <ul>
+            <li>{{ category.products.get }}</li>
+        </ul>
+    {% endfor %}
     <hr>
     <p>
         products count: {{ total_products_count }}

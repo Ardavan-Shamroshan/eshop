@@ -6,8 +6,27 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+# product categories (one to many)
+class ProductCategory(models.Model):
+    title = models.CharField(max_length=300, verbose_name='عنوان')
+    url_title = models.CharField(max_length=300, verbose_name='عنوان در url')
+
+    # to display an object in the Django admin site and as the value inserted into a template
+    def __str__(self):
+        return f"{self.title}"
+
+
+# product information (one to one)
+class ProductInformation(models.Model):
+    color = models.CharField(max_length=200, verbose_name='رنگ')
+    size = models.CharField(max_length=200, verbose_name='اندازه')
+
+
+# products
 class Product(models.Model):
     title = models.CharField(max_length=255)
+    category = models.ForeignKey(ProductCategory, null=True, on_delete=models.CASCADE, related_name='products')
+    information = models.OneToOneField(ProductInformation, verbose_name='اطلاعات تکمیلی', on_delete=models.CASCADE, related_name='information')
     price = models.IntegerField()
     rating = models.IntegerField(validators=[
         MinValueValidator(1),

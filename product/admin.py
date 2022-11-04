@@ -13,8 +13,8 @@ class ProductAdmin(admin.ModelAdmin):
     }
     list_display = [
         'title',
+        'category',
         'price',
-        'summary',
         'rating',
         'is_active',
     ]
@@ -27,4 +27,14 @@ class ProductAdmin(admin.ModelAdmin):
     ]
 
 
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = [
+        'title',
+        'url_title'
+    ]
+
+
+# product admin
 admin.site.register(models.Product, ProductAdmin)
+# product category admin
+admin.site.register(models.ProductCategory, ProductCategoryAdmin)
