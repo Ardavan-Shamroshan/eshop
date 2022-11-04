@@ -21,18 +21,21 @@ class ProductInformation(models.Model):
     color = models.CharField(max_length=200, verbose_name='رنگ')
     size = models.CharField(max_length=200, verbose_name='اندازه')
 
+    def __str__(self):
+        return f'{self.color} {self.size}'
+
 
 # products
 class Product(models.Model):
     title = models.CharField(max_length=255)
-    category = models.ForeignKey(ProductCategory, null=True, on_delete=models.CASCADE, related_name='products')
-    information = models.OneToOneField(ProductInformation, verbose_name='اطلاعات تکمیلی', on_delete=models.CASCADE, related_name='information')
+    category = models.ForeignKey(ProductCategory, null=True, blank=True, on_delete=models.CASCADE, related_name='products')
+    information = models.OneToOneField(ProductInformation, verbose_name='اطلاعات تکمیلی', null=True, blank=True, on_delete=models.CASCADE, related_name='information')
     price = models.IntegerField()
     rating = models.IntegerField(validators=[
         MinValueValidator(1),
         MaxValueValidator(5)
     ], default=0)
-    summary = models.CharField(max_length=350, null=True)
+    summary = models.CharField(max_length=350, null=True, blank=True)
     is_active = models.BooleanField(default=False)
     slug = models.SlugField(default='', null=False, db_index=True)
 

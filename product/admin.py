@@ -23,7 +23,7 @@ class ProductAdmin(admin.ModelAdmin):
         'is_active'
     ]
     list_editable = [
-        'is_active'
+        # 'is_active',
     ]
 
 
@@ -38,3 +38,5 @@ class ProductCategoryAdmin(admin.ModelAdmin):
 admin.site.register(models.Product, ProductAdmin)
 # product category admin
 admin.site.register(models.ProductCategory, ProductCategoryAdmin)
+# product information admin
+admin.site.register(models.ProductInformation)
