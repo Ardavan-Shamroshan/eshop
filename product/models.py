@@ -26,13 +26,13 @@ class ProductCategory(models.Model):
 
 # products
 class Product(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name='عنوان')
     category = models.ManyToManyField(ProductCategory, related_name='product_categories', verbose_name='دسته بندی ها')
     price = models.IntegerField(verbose_name='قیمت')
-    summary = models.CharField(max_length=350, db_index=True, null=True, blank=True)
+    summary = models.CharField(max_length=350, db_index=True, null=True, blank=True, verbose_name='توضیح کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)
+    slug = models.SlugField(default='', null=False, blank=True, max_length=200, unique=True, verbose_name='اسلاگ')
     is_active = models.BooleanField(default=False, verbose_name='فعال / غیر فعال')
-    slug = models.SlugField(default='', null=False, blank=True, max_length=200, unique=True)
     is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
 
     # to display an object in the Django admin site and as the value inserted into a template
@@ -40,7 +40,7 @@ class Product(models.Model):
     # Thus, you should always return a nice, human-readable representation of the model
     # from the __str__() method.
     def __str__(self):
-        return f"{self.title} ({self.price})"
+        return f"{self.title}"
 
     # define a get_absolute_url() method to tell Django how to calculate the canonical URL for an object.
     # To callers, this method should appear to return a string that can be used to refer to the object over HTTP.

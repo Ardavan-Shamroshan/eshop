@@ -7,7 +7,15 @@ from . import models
 # The ModelAdmin class is the representation of a model in the admin interface.
 # Usually, these are stored in a file named admin.py in your application.
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {
+        'slug': ['title']
+    }
+
+    list_filter = ('category', 'is_active')
+
+    list_display = ('title', 'price', 'is_active', 'is_delete')
+
+    list_editable = ()
 
 
 class ProductCategoryAdmin(admin.ModelAdmin):
