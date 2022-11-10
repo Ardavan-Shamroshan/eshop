@@ -6,6 +6,20 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+# product tag
+class ProductTag(models.Model):
+    tag = models.CharField(max_length=200, verbose_name='تگ')
+
+    # to display an object in the Django admin site and as the value inserted into a template
+    def __str__(self):
+        return f"{self.tag}"
+
+    # To override the database table name, use the db_table parameter in class Meta.
+    class Meta:
+        verbose_name = 'تگ'
+        verbose_name_plural = 'تگ ها'
+
+
 # product categories (one to many)
 class ProductCategory(models.Model):
     title = models.CharField(max_length=300, verbose_name='عنوان')
@@ -41,11 +55,9 @@ class Product(models.Model):
     category = models.ForeignKey(ProductCategory, null=True, blank=True, on_delete=models.CASCADE, related_name='products')
     information = models.OneToOneField(ProductInformation, verbose_name='اطلاعات تکمیلی', null=True, blank=True, on_delete=models.CASCADE, related_name='information')
     price = models.IntegerField()
-    rating = models.IntegerField(validators=[
-        MinValueValidator(1),
-        MaxValueValidator(5)
-    ], default=0)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=0)
     summary = models.CharField(max_length=350, null=True, blank=True)
+    tags = models.ManyToManyField(ProductTag, verbose_name='تک های محصولات', related_name='product_tags')
     is_active = models.BooleanField(default=False)
     slug = models.SlugField(default='', null=False, db_index=True)
 

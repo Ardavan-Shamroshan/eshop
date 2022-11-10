@@ -30,7 +30,13 @@ class ProductAdmin(admin.ModelAdmin):
 class ProductCategoryAdmin(admin.ModelAdmin):
     list_display = [
         'title',
-        'url_title'
+        'url_title',
+    ]
+
+
+class ProductTagAdmin(admin.ModelAdmin):
+    list_display = [
+        'tag',
     ]
 
 
@@ -40,3 +46,5 @@ admin.site.register(models.Product, ProductAdmin)
 admin.site.register(models.ProductCategory, ProductCategoryAdmin)
 # product information admin
 admin.site.register(models.ProductInformation)
+# product tag admin
+admin.site.register(models.ProductTag, ProductTagAdmin)
