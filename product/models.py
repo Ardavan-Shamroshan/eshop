@@ -6,24 +6,13 @@ from django.utils.text import slugify
 
 # Create your models here.
 
-# product tag
-class ProductTag(models.Model):
-    tag = models.CharField(max_length=200, verbose_name='تگ')
-
-    # to display an object in the Django admin site and as the value inserted into a template
-    def __str__(self):
-        return f"{self.tag}"
-
-    # To override the database table name, use the db_table parameter in class Meta.
-    class Meta:
-        verbose_name = 'تگ'
-        verbose_name_plural = 'تگ ها'
-
 
 # product categories (one to many)
 class ProductCategory(models.Model):
-    title = models.CharField(max_length=300, verbose_name='عنوان')
-    url_title = models.CharField(max_length=300, verbose_name='عنوان در url')
+    title = models.CharField(max_length=300, db_index=True, verbose_name='عنوان')
+    url_title = models.CharField(max_length=300, db_index=True, verbose_name='عنوان در url')
+    is_active = models.BooleanField(default=False, verbose_name='فعال / غیر فعال')
+    is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
 
     # to display an object in the Django admin site and as the value inserted into a template
     def __str__(self):
@@ -35,31 +24,16 @@ class ProductCategory(models.Model):
         verbose_name_plural = 'دسته بندی ها'
 
 
-# product information (one to one)
-class ProductInformation(models.Model):
-    color = models.CharField(max_length=200, verbose_name='رنگ')
-    size = models.CharField(max_length=200, verbose_name='اندازه')
-
-    def __str__(self):
-        return f'{self.color} {self.size}'
-
-    # To override the database table name, use the db_table parameter in class Meta.
-    class Meta:
-        verbose_name = 'اطلاعات تکمیلی'
-        verbose_name_plural = 'تمامی اطلاعات تکمیلی'
-
-
 # products
 class Product(models.Model):
     title = models.CharField(max_length=255)
-    category = models.ForeignKey(ProductCategory, null=True, blank=True, on_delete=models.CASCADE, related_name='products')
-    information = models.OneToOneField(ProductInformation, verbose_name='اطلاعات تکمیلی', null=True, blank=True, on_delete=models.CASCADE, related_name='information')
-    price = models.IntegerField()
-    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=0)
-    summary = models.CharField(max_length=350, null=True, blank=True)
-    tags = models.ManyToManyField(ProductTag, verbose_name='تک های محصولات', related_name='product_tags')
-    is_active = models.BooleanField(default=False)
-    slug = models.SlugField(default='', null=False, db_index=True)
+    category = models.ManyToManyField(ProductCategory, related_name='product_categories', verbose_name='دسته بندی ها')
+    price = models.IntegerField(verbose_name='قیمت')
+    summary = models.CharField(max_length=350, db_index=True, null=True, blank=True)
+    description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)
+    is_active = models.BooleanField(default=False, verbose_name='فعال / غیر فعال')
+    slug = models.SlugField(default='', null=False, blank=True, max_length=200, unique=True)
+    is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
 
     # to display an object in the Django admin site and as the value inserted into a template
     # when it displays an object.
@@ -86,3 +60,19 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
+
+
+# product tag
+class ProductTag(models.Model):
+    caption = models.CharField(max_length=200, db_index=True, verbose_name='تگ')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
+    is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
+
+    # to display an object in the Django admin site and as the value inserted into a template
+    def __str__(self):
+        return f"{self.caption}"
+
+    # To override the database table name, use the db_table parameter in class Meta.
+    class Meta:
+        verbose_name = 'تگ'
+        verbose_name_plural = 'تگ ها'
