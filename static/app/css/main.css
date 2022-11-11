@@ -10,7 +10,7 @@
     font-family: 'BYekan';
     src: url('../fonts/BYekan.eot');
     src: url('../fonts/BYekan.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/BYekan.woff') format('woff'),
+        /*url('../fonts/BYekan.woff') format('woff'),*/ url('../fonts/IRANSans/IRANSansWeb.woff') format('woff'),
     url('../fonts/BYekan.ttf') format('truetype'),
     url('../fonts/BYekan.svg#BYekan') format('svg');
     font-weight: normal;

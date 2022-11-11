@@ -5,5 +5,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="home"),
+    path('contact-us/', views.contactUs, name="home.contact-us"),
+
+    path('header-partial', views.header_partial)
 
 ]
