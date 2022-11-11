@@ -1,3 +1,5 @@
+{% load render_partial %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,7 +10,7 @@
 
     <body>
         <!-- header -->
-        {% include 'app/partials/header.html' %}
+        {% render_partial 'home.views.header_component' %}
         <!--/header-->
 
         <!--Slider-->
@@ -27,7 +29,7 @@
 
 
         <!--Footer-->
-        {% include 'app/partials/footer.html' %}
+        {% render_partial 'home.views.footer_component' %}
         <!--/Footer-->
 
 

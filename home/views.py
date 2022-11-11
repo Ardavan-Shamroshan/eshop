@@ -14,7 +14,13 @@ def contactUs(request):
     return render(request, 'home/contact-us.html')
 
 
-# header partial
-def header_partial(request):
+# header component
+def header_component(request):
     context = {}
     return render(request, 'app/partials/header.html', context)
+
+
+# footer component
+def footer_component(request):
+    context = {}
+    return render(request, 'app/partials/footer.html', context)
