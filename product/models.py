@@ -13,6 +13,8 @@ class ProductCategory(models.Model):
     url_title = models.CharField(max_length=300, db_index=True, verbose_name='عنوان در url')
     is_active = models.BooleanField(default=False, verbose_name='فعال / غیر فعال')
     is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='ایجاد شده')
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='ویرایش شده')
 
     # to display an object in the Django admin site and as the value inserted into a template
     def __str__(self):
@@ -24,16 +26,36 @@ class ProductCategory(models.Model):
         verbose_name_plural = 'دسته بندی ها'
 
 
+# product brand
+class ProductBrand(models.Model):
+    title = models.CharField(max_length=300, db_index=True, verbose_name='نام برند')
+    is_active = models.BooleanField(default=False, verbose_name='فعال / غیر فعال')
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='ایجاد شده')
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='ویرایش شده')
+
+    # to display an object in the Django admin site and as the value inserted into a template
+    def __str__(self):
+        return f"{self.title}"
+
+    # To override the database table name, use the db_table parameter in class Meta.
+    class Meta:
+        verbose_name = 'برند'
+        verbose_name_plural = 'برند ها'
+
+
 # products
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='عنوان')
     category = models.ManyToManyField(ProductCategory, related_name='product_categories', verbose_name='دسته بندی ها')
+    brand = models.ForeignKey(ProductBrand, null=True, blank=True, related_name='brand', on_delete=models.CASCADE, verbose_name='برند')
     price = models.IntegerField(verbose_name='قیمت')
     summary = models.CharField(max_length=350, db_index=True, null=True, blank=True, verbose_name='توضیح کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)
     slug = models.SlugField(default='', null=False, blank=True, max_length=200, unique=True, verbose_name='اسلاگ')
     is_active = models.BooleanField(default=False, verbose_name='فعال / غیر فعال')
     is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='ایجاد شده')
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='ویرایش شده')
 
     # to display an object in the Django admin site and as the value inserted into a template
     # when it displays an object.
@@ -67,6 +89,8 @@ class ProductTag(models.Model):
     caption = models.CharField(max_length=200, db_index=True, verbose_name='تگ')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
     is_delete = models.BooleanField(default=False, verbose_name='حذف شده / حذف نشده')
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='ایجاد شده')
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name='ویرایش شده')
 
     # to display an object in the Django admin site and as the value inserted into a template
     def __str__(self):

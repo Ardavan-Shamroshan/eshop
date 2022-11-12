@@ -17,15 +17,8 @@ def index(request):
 
 
 # Product detail
-def show(request, product_slug):
-    # try:
-    #     product = Product.objects.get(pk=product_id)
-    #     context = {
-    #         'product': product
-    #     }
-    # except Exception:
-    #     raise Http404()
-    product = get_object_or_404(Product, slug=product_slug)
+def show(request, slug):
+    product = get_object_or_404(Product, slug=slug)
     context = {
         'product': product
     }

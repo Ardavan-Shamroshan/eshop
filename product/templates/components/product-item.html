@@ -6,9 +6,7 @@
                 <img src="{% static 'app/images/shop/product.jpg' %}" alt=""/>
                 <h2>{{ product.price }} تومان</h2>
                 <p>{{ product.title }}</p>
-                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>افزودن
-                    به
-                    سبـد خریـد</a>
+                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
             </div>
             <div class="product-overlay">
                 <div class="overlay-content">
@@ -21,7 +19,7 @@
         </div>
         <div class="choose">
             <ul class="nav nav-pills nav-justified">
-                <li><a href=""><i class="fa fa-plus-square"></i>لیست علاقه مندی ها</a></li>
+                <li><a href="{% url 'product.show' product.slug %}"><i class="fa fa-plus-square"></i>مشاهده</a></li>
                 <li><a href=""><i class="fa fa-plus-square"></i>مقایسه</a></li>
             </ul>
         </div>
