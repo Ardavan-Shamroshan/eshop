@@ -14,6 +14,11 @@ def contactUs(request):
     return render(request, 'home/contact-us.html')
 
 
+"""render components, using django-render-partial package
+see https://pypi.org/project/django-render-partial/
+"""
+
+
 # header component
 def header_component(request):
     context = {}

@@ -1,23 +1,35 @@
-{% extends 'layouts/base.html' %}
-{% block title %}
-    product list
+{% extends 'app/partials/layout.html' %}
+{% load static %}
+{% load render_partial %}
+{% block title %}محصولات عمده | فروشگاه کارزیبا{% endblock %}
+{% block slider %}
+    <section id="advertisement">
+        <div class="container">
+            <img src="{% static 'app/images/shop/advertisement.jpg' %}" alt=""/>
+        </div>
+    </section>
 {% endblock %}
 {% block content %}
-    <ul>
-        {% for product in products %}
-            {#            <li><a href="{% url 'product.show' product_slug=product.slug %}">{{ product.title }} / {{ product.price }}$</a></li>#}
-            <li><a href="{{ product.get_absolute_url }}">{{ product.title }} / {{ product.price }}$</a></li>
-        {% endfor %}
-    </ul>
-    {% for category in categories %}
-        <h3> دسته {{ category.title }}</h3>
-        <ul>
-            <li>{{ category.products.get }}</li>
-        </ul>
-    {% endfor %}
-    <hr>
-    <p>
-        products count: {{ total_products_count }}
-    </p>
+    <div class="col-sm-9 padding-right">
+        <div class="features_items">
+            <!--features_items-->
+            <h2 class="title text-center">محصولات عمده</h2>
+
+            {% for product in products %}
+                {% render_partial 'product.views.product_item_component' product=product %}
+            {% endfor %}
+
+            <div class="clearfix"></div>
+
+            <ul class="pagination">
+                <li class="active"><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">&raquo;</a></li>
+            </ul>
+        </div><!--features_items-->
+    </div>
+
+    {% render_partial 'product.views.sidebar_component' %}
 
 {% endblock %}
