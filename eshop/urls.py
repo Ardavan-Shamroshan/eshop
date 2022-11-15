@@ -21,5 +21,7 @@ urlpatterns = [
     # home module
     path('', include('home.urls')),
     # product module
-    path('product/', include('product.urls'))
+    path('product/', include('product.urls')),
+    # contact module
+    path('contact-us/', include('contact.urls')),
 ]

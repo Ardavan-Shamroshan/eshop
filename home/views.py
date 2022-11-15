@@ -9,11 +9,6 @@ def index(request):
     return render(request, 'home/index.html')
 
 
-# contact us page
-def contactUs(request):
-    return render(request, 'home/contact-us.html')
-
-
 """render components, using django-render-partial package
 see https://pypi.org/project/django-render-partial/
 """
