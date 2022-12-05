@@ -5,7 +5,7 @@ from django.db import models
 
 # contact
 class ContactUs(models.Model):
-    title = models.CharField(max_length=300, verbose_name="عنوان")
+    subject = models.CharField(max_length=300, verbose_name="عنوان")
     email = models.CharField(max_length=300, verbose_name="ایمیل")
     full_name = models.CharField(max_length=300, verbose_name="نام و نام خانوادگی")
     message = models.TextField(verbose_name="متن تماس با ما")
@@ -19,7 +19,7 @@ class ContactUs(models.Model):
     # Thus, you should always return a nice, human-readable representation of the model
     # from the __str__() method.
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.subject}"
 
     # To override the database table name, use the db_table parameter in class Meta.
     class Meta:
