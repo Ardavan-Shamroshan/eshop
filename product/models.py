@@ -18,7 +18,7 @@ class ProductCategory(models.Model):
 
     # to display an object in the Django admin site and as the value inserted into a template
     def __str__(self):
-        return f"{self.subject}"
+        return f"{self.title}"
 
     # To override the database table name, use the db_table parameter in class Meta.
     class Meta:
@@ -35,7 +35,7 @@ class ProductBrand(models.Model):
 
     # to display an object in the Django admin site and as the value inserted into a template
     def __str__(self):
-        return f"{self.subject}"
+        return f"{self.title}"
 
     # To override the database table name, use the db_table parameter in class Meta.
     class Meta:
