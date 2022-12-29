@@ -70,6 +70,7 @@ class Product(models.Model):
         # While this code is correct and simple, it may not be the most portable way to write this kind of method.
         # The reverse() function is usually the best approach.
         return reverse('product.show', args=[self.slug])
+        # return reverse('product.show', args=[self.id])
 
     # Overriding save() method
     # To save an object back to the database, call save():

@@ -23,31 +23,50 @@
                               name="contact-form" method="post">
                             {% csrf_token %}
 
-{#                            {% for field in contact_form %}#}
-{#                                <div class="form-group col-md-12">#}
-{#                                    {{ field }}#}
-{#                                    <div class="text-danger">{{ field.errors }}</div>#}
-{#                                </div>#}
-{#                            {% endfor %}#}
-{##}
-{#                            <hr>#}
+                            {#                            {% for field in contact_form %}#}
+                            {#                                <div class="form-group col-md-12">#}
+                            {#                                    {{ field }}#}
+                            {#                                    <div class="text-danger">{{ field.errors }}</div>#}
+                            {#                                </div>#}
+                            {#                            {% endfor %}#}
+                            {##}
+                            {#                            <hr>#}
 
+                            {#                            <div class="form-group col-md-6">#}
+                            {#                                {{ contact_form.full_name }}#}
+                            {#                                <div class="text-danger">{{ contact_form.full_name.errors }}</div>#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group col-md-6">#}
+                            {#                                {{ contact_form.email }}#}
+                            {#                                <div class="text-danger">{{ contact_form.email.errors }}</div>#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group col-md-12">#}
+                            {#                                {{ contact_form.subject }}#}
+                            {#                                <div class="text-danger">{{ contact_form.subject.errors }}</div>#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group col-md-12">#}
+                            {#                                {{ contact_form.message }}#}
+                            {#                                <div class="text-danger">{{ contact_form.message.errors }}</div>#}
+                            {#                           </div>#}
+
+                            {# using FormView (form is kw) #}
                             <div class="form-group col-md-6">
-                                {{ contact_form.full_name }}
-                                <div class="text-danger">{{ contact_form.full_name.errors }}</div>
+                                {{ form.full_name }}
+                                <div class="text-danger">{{ form.full_name.errors }}</div>
                             </div>
                             <div class="form-group col-md-6">
-                                {{ contact_form.email }}
-                                <div class="text-danger">{{ contact_form.email.errors }}</div>
+                                {{ form.email }}
+                                <div class="text-danger">{{ form.email.errors }}</div>
                             </div>
                             <div class="form-group col-md-12">
-                                {{ contact_form.subject }}
-                                <div class="text-danger">{{ contact_form.subject.errors }}</div>
+                                {{ form.subject }}
+                                <div class="text-danger">{{ form.subject.errors }}</div>
                             </div>
                             <div class="form-group col-md-12">
-                                {{ contact_form.message }}
-                                <div class="text-danger">{{ contact_form.message.errors }}</div>
+                                {{ form.message }}
+                                <div class="text-danger">{{ form.message.errors }}</div>
                             </div>
+
                             <div class="form-group col-md-12">
                                 <button type="submit" name="submit" class="btn btn-primary pull-right">ارسال</button>
                             </div>

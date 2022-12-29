@@ -4,5 +4,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="home"),
+    # function based url
+    # path('', views.index, name="home"),
+
+    # class based url
+    path('', views.HomeView.as_view(), name="home"),
 ]
