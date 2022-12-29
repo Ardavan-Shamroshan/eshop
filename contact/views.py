@@ -4,7 +4,7 @@ from django.views import View
 from .forms import ContactUsForm, ContactUsModelForm
 from .models import ContactUs
 from django.views.generic import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 
 
 # Create your views here.
@@ -27,9 +27,21 @@ from django.views.generic.edit import FormView
 
 # form view
 # when form view is in use, contact_form kw in contact/contact-us.html should change to form kw
-class ContactUsView(FormView):
+# class ContactUsView(FormView):
+#     template_name = 'contact/contact-us.html'
+#     form_class = ContactUsModelForm
+#     # success url
+#     success_url = '/contact-us/'
+#
+#     # if form is valid
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
+
+class ContactUsView(FormView, CreateView):
     template_name = 'contact/contact-us.html'
-    form_class = ContactUsModelForm
+    model = ContactUs
+    fields = '__all__'
     # success url
     success_url = '/contact-us/'
 
@@ -37,15 +49,6 @@ class ContactUsView(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-
-    # def post(self, request):
-    #     contact_form = ContactUsModelForm(request.POST)
-    #     if contact_form.is_valid():
-    #         contact_form.save()
-    #         return redirect('home')
-    #
-    #     context = {'contact_form': contact_form}
-    #     return render(request, 'contact/contact-us.html', context)
 
 
 # function base view
