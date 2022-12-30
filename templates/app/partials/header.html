@@ -82,7 +82,8 @@
                         {% with request.resolver_match.url_name as url_name %}
 
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="{% url 'home' %}" class="{% if url_name == 'home' %} active {% endif %} ">خـانه</a></li>
+                                <li><a href="{% url 'home' %}" class="{% if url_name == 'home' %} active {% endif %} ">خـانه</a>
+                                </li>
                                 <li class="dropdown"><a href="#">فروشگـاه<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="{% url 'product' %}">محصولات</a></li>
@@ -99,7 +100,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="About.html">درباره مـا</a></li>
-                                <li><a href="{% url 'contact' %}" class="{% if url_name == 'contact-us' %} active {% endif %} ">تماس با مـا</a></li>
+                                <li>
+                                    <a href="{% url 'contact' %}"
+                                       class="{% if url_name == 'contact-us' %} active {% endif %} ">تماس با مـا</a>
+                                </li>
+                                <li><a href="{% url 'contact.profile' %}">پروفایل</a></li>
                             </ul>
                         {% endwith %}
                     </div>
