@@ -120,6 +120,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# file upload root
+MEDIA_ROOT = BASE_DIR / 'uploads/'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static/'
 ]
