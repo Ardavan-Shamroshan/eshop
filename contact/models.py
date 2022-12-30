@@ -28,4 +28,5 @@ class ContactUs(models.Model):
 
 
 class UserProfile(models.Model):
-    image = models.FileField(upload_to='images')
+    # image = models.FileField(upload_to='images')
+    image = models.ImageField()

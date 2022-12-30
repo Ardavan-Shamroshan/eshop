@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views import View
 from .forms import ContactUsModelForm, ProfileForm
 from .models import ContactUs, UserProfile
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import FormView, CreateView
 
 
@@ -75,19 +75,31 @@ def store_file(file):
             destination.write(chunk)
 
 
-class CreateProfileView(View):
-    def get(self, request):
-        context = {'form': ProfileForm()}
-        return render(request, 'contact/profile.html', context)
+# class CreateProfileView(View):
+    # def get(self, request):
+    #     context = {'form': ProfileForm()}
+    #     return render(request, 'contact/profile.html', context)
+    #
+    # def post(self, request):
+    #     submitted_form = ProfileForm(request.POST, request.FILES)
+    #     if submitted_form.is_valid():
+    #         # store_file(request.FILES['image'])
+    #         profile = UserProfile(image=request.FILES['user_image'])
+    #         profile.save()
+    #         return redirect('contact.profile')
+    #
+    #     # else
+    #     context = {'form': ProfileForm()}
+    #     return render(request, 'contact/profile.html', context)
 
-    def post(self, request):
-        submitted_form = ProfileForm(request.POST, request.FILES)
-        if submitted_form.is_valid():
-            # store_file(request.FILES['image'])
-            profile = UserProfile(image=request.FILES['user_image'])
-            profile.save()
-            return redirect('contact.profile')
+class CreateProfileView(CreateView):
+    template_name = 'contact/profile.html'
+    model = UserProfile
+    fields = '__all__'
+    success_url = '/contact-us/profile'
 
-        # else
-        context = {'form': ProfileForm()}
-        return render(request, 'contact/profile.html', context)
+
+class ProductListView(ListView):
+    model = UserProfile
+    template_name = 'contact/profile-list.html'
+    context_object_name = 'profiles'
